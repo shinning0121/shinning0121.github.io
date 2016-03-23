@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Task03</title>
 	<style type="text/css">
+	.clearfix {
+  		overflow: auto;
+  		zoom: 1;
+	}
 	body{
 		padding: 20px;
 	}
@@ -11,36 +15,51 @@
 		padding: 20px;
 		background-color: #eee;
 		border:1px solid #999;
+		overflow: auto;
 	}
-	.s1{
-		width: 200px;
+	section{		
+		padding:20px;
 		border:1px solid #999;
 		background-color: #fff;
 	}
+	.s1{
+		width: 160px;
+		position: relative;
+		float:left;
+	}
 	.name{
-		display: inline-block;
+		position: absolute;
+		top:10px;
+		right:10px;
+		font-size: 14px;
 	}
 	img{
 		width: 80px;
 		height: 80px;
-		margin:20px;
+	}
+	.s2{
+		margin-left: 220px;
+        margin-right:140px;
 	}
 	.s3{
-		width:120px;
+		width:80px;
+		float: right;
+	}
+	.person{
+		padding-bottom: 20px;
+	}
+	.person4{
+		padding-bottom: 0;
 	}
 	</style>
 </head>
 <body>
 	<article>
 		<section class="s1">
-			<div>
-				<img src="http://f.hiphotos.baidu.com/zhidao/pic/item/f31fbe096b63f62416beca118344ebf81b4ca3c5.jpg">
-				<h3 class="name">bupt_fnl</h3>
-			</div>
+			<img src="http://f.hiphotos.baidu.com/zhidao/pic/item/f31fbe096b63f62416beca118344ebf81b4ca3c5.jpg">
+			<h3 class="name">bupt_fnl</h3>
 		</section>
-		<section class="s2">
-			
-		</section>
+
 		<section class="s3">
 			<div class="person">
 				<img src="http://f.hiphotos.baidu.com/zhidao/pic/item/f31fbe096b63f62416beca118344ebf81b4ca3c5.jpg" />	
@@ -51,9 +70,15 @@
 			<div class="person">
 				<img src="http://f.hiphotos.baidu.com/zhidao/pic/item/f31fbe096b63f62416beca118344ebf81b4ca3c5.jpg" />	
 			</div>
-			<div class="person">
+			<div class="person4">
 				<img src="http://f.hiphotos.baidu.com/zhidao/pic/item/f31fbe096b63f62416beca118344ebf81b4ca3c5.jpg" />	
 			</div>
+		</section>
+
+		<section class="s2">
+			<h2>团队介绍</h2>
+			<p>未来网络理论与应用实验室（Future Network Laboratory，FNL）是北京邮电大学信息与通信工程学院（以下简称信通院）下属的一个学术团队，专门从事电信网、互联网等网络技术领域的创新研究。实验室于2008年4月正式成立，现有教师13名，其中院士1名，教授4名，副教授6名，讲师2名，博士后1名，建立起了包括博士生和硕士生在内约70人的研究队伍、学历层次合理</p>
+			<p>本支队伍由北邮fnl实验室五名小伙伴组成，大家一起互相学习，互相进步。</p>
 		</section>
 	</article>
 </body>
