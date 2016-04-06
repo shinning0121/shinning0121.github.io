@@ -11,7 +11,7 @@ var city = document.getElementById("aqi-city-input");
 var value = document.getElementById("aqi-value-input");
 var table = document.getElementById("aqi-table");
 var alphaReg = /^[\u4e00-\u9fa5aa-zA-z]+$/;  //筛选中英文字符
-var numReg = /[\d*]/;         //筛选数字
+var numReg = /^\d+$/;         //筛选数字
 var nullReg = /[(^\s+)(\s+$)]/g;  //去掉两头空格
 /**
  * 从用户输入中获取数据，向aqiData中增加一条数据
@@ -19,7 +19,7 @@ var nullReg = /[(^\s+)(\s+$)]/g;  //去掉两头空格
  */
 function addAqiData() {
 	var pcity = city.value.replace(nullReg,"");
-	var pvalue = Number.parseInt(value.value.replace(nullReg,""));
+	var pvalue = value.value.replace(nullReg,"");
 	if (!alphaReg.test(pcity)) {
 		alert("城市名只能包含中英文字符！");
 		return;
@@ -36,7 +36,7 @@ function addAqiData() {
  * 渲染aqi-table表格
  */
 function renderAqiList() {
-	table.innerHTML = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>"; 
+	table.innerHTML = "<tr><th>城市</th><th>空气质量</th><th>操作</th></tr>"; 
 	for (var data in aqiData) {
 		table.innerHTML += "<tr><td>" + data + "</td><td>" + aqiData[data] + "</td><td><button onclick = 'delBtnHandle(\""+data+"\")'>"+"删除" + "</button></td>"+"</tr>"; 
 	}
@@ -47,7 +47,6 @@ function renderAqiList() {
  * 获取用户输入，更新数据，并进行页面呈现的更新
  */
 function addBtnHandle() {
-  alert("dde");
   addAqiData();
   renderAqiList();
 }
