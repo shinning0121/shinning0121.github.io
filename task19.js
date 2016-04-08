@@ -7,7 +7,9 @@ window.onload = function () {
     var display = document.getElementById("result");
     var reset = document.getElementById("reset");
     var sort = document.getElementById("sort");
+    var random = document.getElementById("random");
     var data = [];
+    var dataset = [];
     function addEvent(element, type, handler) {
         if (element.addEventListener) {  //兼容测试，非ie有这个属性
             element.addEventListener(type, handler, false);
@@ -17,7 +19,7 @@ window.onload = function () {
             element["on" + type] = handler;    //没有则添加事件
         }
     }
-    function render() {
+    function render(data) {
       display.innerHTML = "";
       for (var i = 0; i < data.length; i++) {
         color = 'rgb('+parseInt(256*Math.random())+','+parseInt(256*Math.random())+','+parseInt(256*Math.random())+')';
@@ -37,6 +39,20 @@ window.onload = function () {
             }
         }
     }
+    function bubblesort(array) {
+        dataset = [];
+        for (var i = 0; i < array.length; i++) {
+            for (var j = 0; j < array.length - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    var temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    dataset.push(JSON.parse(JSON.stringify(array)));
+                }
+            }     
+        }
+        return array;
+    } 
     addEvent(leftIn, "click", function () {
         if (data.length >= 60) {
             alert("输入的数字不能超过60个！");
@@ -46,13 +62,13 @@ window.onload = function () {
         	alert("输入不合法，请输入10-100间的数字！");
         } else {
             data.unshift(parseInt(text.value)); //数组头部插入
-            render();
+            render(data);
         }
     });
     addEvent(leftOut, "click", function () {
         if (data.length != 0) {
             data.shift();  //数组头部删除
-            render();
+            render(data);
         } else {
             alert("队列为空，无法移除");
         }
@@ -66,32 +82,42 @@ window.onload = function () {
         	alert("输入不合法，请输入10-100间的数字！");
         } else {
             data.push(parseInt(text.value)); //数组尾部加入
-	        render();
+	        render(data);
     	}
     });
     addEvent(rightOut, "click", function () {
         if (data.length != 0) {
             data.pop();  //数组尾部删除
-            render();
+            render(data);
         } else {
             alert("队列为空，无法移除");
         }
     });
     addEvent(reset, "click", function() {
         data = [];
-        render();
+        render(data);
+    });
+    addEvent(random, "click", function() {
+        data = [];
+        for (var i = 0; i < 30; i++) {
+            var num = Math.floor(91*Math.random()) + 10;
+            data.push(num);
+        }
+        render(data);
     });
     addEvent(sort, "click", function() {
-        for (var i = 0; i < data.length; i++) {
-            for (var j = 0; j < data.length - i - 1; j++) {
-                if (data[j] > data[j + 1]) {
-                    var temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
-                }
+        data = bubblesort(data);
+        var timer;
+        timer = setInterval(draw, 300);  //每300ms循环一次
+        function draw() {
+            var dat = dataset.shift();
+            if (dat.length != 0) {
+                render(dat);
+            } else {
+                clearInterval(timer);
+                return;
             }
         }
-        render();
     });
     addEvent(text, "focus", function () {
        text.value = "";
